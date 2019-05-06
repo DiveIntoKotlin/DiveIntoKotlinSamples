@@ -10,7 +10,7 @@ sealed class List<out A> : Kind<List.K, A> {
 object Nil : List<Nothing>()
 data class Cons<A>(val head: A, val tail: List<A>) : List<A>()
 
-object ListFunctor : Functor<List.K> {
+interface IListFunctor : Functor<List.K> {
 	override fun <A, B> Kind<List.K, A>.map(f: (A) -> B): Kind<List.K, B> {
 		return when (this) {
 			is Cons -> {
@@ -21,6 +21,8 @@ object ListFunctor : Functor<List.K> {
 		}
 	}
 }
+
+object ListFunctor : IListFunctor
 
 object ListShow : Show<List.K> {
 	override fun <A> Kind<List.K, A>.show(): String {
@@ -71,10 +73,58 @@ object IntEq : Eq<Int> {
 
 object IntListEq : ListEq<Int>(IntEq)
 
+object ListMonad : Monad<List.K> {
+
+	private fun <A> append(fa: Kind<List.K, A>, fb: Kind<List.K, A>): Kind<List.K, A> {
+		return if (fa is Cons) {
+			Cons(fa.head, append(fa.tail, fb).unwrap())
+		} else {
+			fb
+		}
+	}
+
+	override fun <A> pure(a: A): Kind<List.K, A> {
+		return Cons(a, Nil)
+	}
+
+	override fun <A, B> Kind<List.K, A>.flatMap(f: (A) -> Kind<List.K, B>): Kind<List.K, B> {
+		val fa = this
+		val empty: Kind<List.K, B> = Nil
+		return ListFoldable.run {
+			fa.fold(empty)({ r, l ->
+				append(r, f(l))
+			}
+			)
+		}
+	}
+}
+
+object IntAddMonoid : Monoid<Int> {
+	override fun zero(): Int {
+		return 0
+	}
+
+	override fun Int.append(b: Int): Int {
+		return this + b
+	}
+}
+
+fun <A> List<A>.sum(ma: Monoid<A>): A {
+	val fa = this
+	return ListFoldable.run {
+		fa.fold(ma.zero())({ s, i ->
+			ma.run {
+				s.append(i)
+			}
+		})
+	}
+}
+
+
 fun main(args: Array<String>) {
 	val v = ListFunctor.run {
 		Cons(1, Nil).map { it + 1 }
-	}
+	}.unwrap()
 
 	println(ListShow.run {
 		v.show()
@@ -83,4 +133,5 @@ fun main(args: Array<String>) {
 	println(IntListEq.run {
 		v.eq(Cons(2, Nil))
 	})
+	println(v.sum(IntAddMonoid))
 }
