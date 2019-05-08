@@ -2,8 +2,8 @@ package samples.ch10
 
 data class EitherT<F, L, A>(val value: Kind<F, Either<L, A>>) {
   companion object {
-    fun <F, A, B> pure(AP: Applicative<F>): (B) -> EitherT<F, A, B> = { b ->
-      EitherT(AP.pure(Right(b)))
+    fun <F, A, B> pure(AP: Applicative<F>, b: B):  EitherT<F, A, B> {
+      return EitherT(AP.pure(Right(b)))
     }
   }
 
@@ -33,8 +33,8 @@ data class EitherT<F, L, A>(val value: Kind<F, Either<L, A>>) {
 }
 
 fun main(args: Array<String>) {
-  val e1 = EitherT.pure<List.K, String, Int>(ListMonad)(1)
-  val e2 = EitherT.pure<List.K, String, Int>(ListMonad)(2)
+  val e1 = EitherT.pure<List.K, String, Int>(ListMonad, 1)
+  val e2 = EitherT.pure<List.K, String, Int>(ListMonad, 2)
   val e3 = e1.flatMap(ListMonad) { v1 ->
     e2.map(ListMonad) { v2 ->
       v1 + v2

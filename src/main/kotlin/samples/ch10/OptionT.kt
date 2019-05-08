@@ -4,8 +4,8 @@ data class OptionT<F, A>(val value: Kind<F, Option<A>>) {
   object K
 
   companion object {
-    fun <F, A> pure(AP: Applicative<F>): (A) -> OptionT<F, A> = { v ->
-      OptionT(AP.pure(Some(v)))
+    fun <F, A> pure(AP: Applicative<F>, v: A): OptionT<F, A>  {
+      return OptionT(AP.pure(Some(v)))
     }
 
     fun <F, A> none(AP: Applicative<F>): OptionT<F, A> {
@@ -49,8 +49,8 @@ data class OptionT<F, A>(val value: Kind<F, Option<A>>) {
 
 
 fun main(args: Array<String>) {
-  val fa1 = OptionT.pure<List.K, Int>(ListMonad)(1)
-  val fa2 = OptionT.pure<List.K, Int>(ListMonad)(2)
+  val fa1 = OptionT.pure(ListMonad, 1)
+  val fa2 = OptionT.pure(ListMonad, 2)
   val fa3 = fa1.flatMap(ListMonad) { a1: Int ->
     fa2.map(ListMonad) { a2: Int ->
       a1 + a2
