@@ -31,7 +31,7 @@ fun countryFilterTest() {
 	val countryApp = CountryApp()
 	val countryTest = CountryTest()
 	val countries = listOf(Country("China", "Asia", 1300000000))
-
+	
 	countryApp.filterCountries(countries, countryTest::isBigEuropeanCountry)
 	countryApp.filterCountries(countries, fun(country: Country): Boolean {
 		return country.continient == "EU" && country.population > 10000

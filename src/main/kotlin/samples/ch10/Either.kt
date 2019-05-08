@@ -1,6 +1,8 @@
+package samples.ch10
+
 @Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
 inline fun <A, B> Kind2<Either.K, A, B>.unwrap(): Either<A, B> =
-		this as Either<A, B>
+	this as Either<A, B>
 
 
 sealed class Either<out A, out B> : Kind2<Either.K, A, B> {
