@@ -2,7 +2,7 @@ package samples.ch10
 
 data class EitherT<F, L, A>(val value: Kind<F, Either<L, A>>) {
   companion object {
-    fun <F, A, B> pure(AP: Applicative<F>, b: B):  EitherT<F, A, B> {
+    fun <F, A, B> pure(AP: Applicative<F>, b: B): EitherT<F, A, B> {
       return EitherT(AP.pure(Right(b)))
     }
   }

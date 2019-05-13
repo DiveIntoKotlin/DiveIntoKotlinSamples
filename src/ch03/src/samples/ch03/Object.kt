@@ -20,10 +20,10 @@ class Prize1 private constructor(val name: String, val count: Int, val type: Int
         val TYPE_COUPON = 3
 
 
-        val defaultCommonPrize = Prize1("普通奖品", 10, Prize1.TYPE_COMMON)
+        val defaultCommonPrize = Prize1("普通奖品", 10, TYPE_COMMON)
 
-        fun newRedpackPrize(name: String, count: Int) = Prize1(name, count, Prize1.TYPE_REDPACK)
-        fun newCouponPrize(name: String, count: Int) = Prize1(name, count, Prize1.TYPE_COUPON)
+        fun newRedpackPrize(name: String, count: Int) = Prize1(name, count, TYPE_REDPACK)
+        fun newCouponPrize(name: String, count: Int) = Prize1(name, count, TYPE_COUPON)
         fun defaultCommonPrize() = defaultCommonPrize
     }
 }

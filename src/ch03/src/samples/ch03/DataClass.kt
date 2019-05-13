@@ -3,8 +3,8 @@ package samples.ch03
 data class Bird9(var weight: Double, var age: Int, var color: String)
 
 fun main(args: Array<String>) {
-    val b1 = Bird9(weight = 1000.0, age= 1, color = "blue")
-    val b2 = Bird9(weight = 1000.0, age= 1, color = "blue")
+    val b1 = Bird9(weight = 1000.0, age = 1, color = "blue")
+    val b2 = Bird9(weight = 1000.0, age = 1, color = "blue")
     println(b1.equals(b2))
     println(b1 == b2)
 
