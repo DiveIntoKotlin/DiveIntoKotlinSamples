@@ -79,7 +79,7 @@ object ListMonad : Monad<List.K> {
 
   private fun <A> append(fa: Kind<List.K, A>, fb: Kind<List.K, A>): Kind<List.K, A> {
     return if (fa is Cons) {
-      Cons(fa.head, append(fa.tail, fb).unwrap())
+        Cons(fa.head, append(fa.tail, fb).unwrap())
     } else {
       fb
     }
@@ -94,7 +94,7 @@ object ListMonad : Monad<List.K> {
     val empty: Kind<List.K, B> = Nil
     return ListFoldable.run {
       fa.fold(empty)({ r, l ->
-        append(r, f(l))
+          append(r, f(l))
       }
       )
     }

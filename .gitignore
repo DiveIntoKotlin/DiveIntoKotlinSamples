@@ -4,3 +4,7 @@ bin/
 project/
 .settings/
 .project
+.idea
+*.iml
+classes
+.DS_Store
