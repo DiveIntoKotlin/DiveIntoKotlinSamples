@@ -14,14 +14,14 @@ class Penguin : Bird6() {
 }
 
 
+private open class Engine(val type: String) {
+    protected open fun engineType(): String {
+        return "the engine type is $type"
+    }
+}
+
 private class BZEngine(type: String) : Engine(type) {
 	override fun engineType(): String {
 		return super.engineType()  //ok
-	}
-}
-
-private open class Engine(val type: String) {
-	protected open fun engineType(): String {
-		return "the engine type is $type"
 	}
 }

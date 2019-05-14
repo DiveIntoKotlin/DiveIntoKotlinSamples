@@ -71,24 +71,6 @@ open class Animal2 : CanEat {
 
 class Bird8(flyer: Flyer2, animal: Animal2) : CanFly by flyer, CanEat by animal {}
 
-class Prize(val name: String, val count: Int, val type: Int) {
-	companion object {
-		val TYPE_REDPACK = 0
-		val TYPE_COUPON = 1
-
-		fun isRedpack(prize: Prize): Boolean {
-			return prize.type == TYPE_REDPACK
-		}
-	}
-}
-
-object DatabaseConfig {
-	var host: String = "127.0.0.1"
-	var port: Int = 3306
-	var username: String = "root"
-	var password: String = ""
-}
-
 fun main(args: Array<String>) {
 	val flyer = Flyer2()
 	val animal = Animal2()

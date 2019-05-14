@@ -67,6 +67,6 @@ interface Flyer {
 
 
 fun main(args: Array<String>) {
-	val bird = Bird1(1000.0, 2, "bule")
+	val bird = Bird1(1000.0, 2, "blue")
 	println(bird)
 }

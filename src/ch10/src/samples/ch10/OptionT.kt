@@ -4,7 +4,7 @@ data class OptionT<F, A>(val value: Kind<F, Option<A>>) {
   object K
 
   companion object {
-    fun <F, A> pure(AP: Applicative<F>, v: A): OptionT<F, A>  {
+    fun <F, A> pure(AP: Applicative<F>, v: A): OptionT<F, A> {
       return OptionT(AP.pure(Some(v)))
     }
 
@@ -15,7 +15,7 @@ data class OptionT<F, A>(val value: Kind<F, Option<A>>) {
     fun <F, A> liftF(M: Functor<F>, fa: Kind<F, A>): OptionT<F, A> {
       val v = M.run {
         fa.map {
-          Some(it)
+            Some(it)
         }
       }
       return OptionT(v)
