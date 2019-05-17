@@ -21,18 +21,8 @@ allprojects {
   }
   apply plugin: 'kotlin'
     
-    compileKotlin {
-        kotlinOptions {
-            apiVersion = "1.2"
-            jvmTarget = "1.8"
-        }
-    }
-    
   dependencies {
      implementation "org.jetbrains.kotlin:kotlin-stdlib:1.3.31"
      testImplementation "junit:junit:4.12"
   }
-//  sourceSets {
-//    main.kotlin.srcDirs += 'src/samples'
-//  }
 }
