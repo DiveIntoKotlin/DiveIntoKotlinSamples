@@ -1,0 +1,7 @@
+dependencies {
+    compile group: 'org.scala-lang', name: 'scala-library', version: '2.12.8'
+    compile group: 'com.typesafe.akka', name: 'akka-persistence_2.12', version: '2.5.14'
+    compile group: 'org.iq80.leveldb', name: 'leveldb', version: '0.10'
+    compile group: 'com.twitter', name: 'chill-akka_2.12', version: '0.9.2'
+    compile group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: '1.1.1'
+}
