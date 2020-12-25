@@ -30,7 +30,7 @@ class Bird3(weight: Double, age: Int, color: String) {
 
 	init {
 		this.color = color
-		println("The bird's age is ${this.color}.")
+		println("The bird's color is ${this.color}.")
 	}
 }
 
